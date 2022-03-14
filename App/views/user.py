@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, jsonify, request, send_from_directory
-from flask_jwt import jwt_required
+from flask_login import login_required
 
 
 from App.controllers import (
@@ -9,8 +9,15 @@ from App.controllers import (
 )
 
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
+@user_views.route('/home',methods=['GET'])
+@login_required
+def home():
+    pass
 
-
+@user_views.route('/login',methods=['POST'])
+def user_login():
+    pass
+'''
 @user_views.route('/users', methods=['GET'])
 def get_user_page():
     users = get_all_users()
@@ -28,3 +35,4 @@ def lol():
 @user_views.route('/static/users')
 def static_user_page():
   return send_from_directory('static', 'static-user.html')
+'''
